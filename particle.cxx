@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 
+ClassImp(particle)
+
 // default constructor - ROOT needs the default one where everything is set to 0
 particle::particle() :
 // initialize all members to null

@@ -13,13 +13,13 @@ auto file = TFile::Open("tree_file.root");
 // get your tree
 TTree *T = static_cast<TTree*>(file->Get("T"));
 // remember to set the branch address
-T->SetBranchAddress("p", &p);
+T->SetBranchAddress("particle", &p);
 Int_t N = T->GetEntries();
 
 TH2F *h1 = new TH2F("h1", "px over py", 50, -0.1, 0.1, 50, -0.1, 0.1);
 for (Int_t i{0}; i<N; i++){ // loop over the whole tree
     T->GetEntry(i);
-    h1->Fill(p->getMagnitude(), p->getMagnitude());
+    h1->Fill(p->getPx(), p->getPy());
 // do something
 }
 auto canvas1 = TCanvas("c1", "", 800, 600);

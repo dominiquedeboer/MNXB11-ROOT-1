@@ -4,14 +4,15 @@
 # include <TRandom.h>
 
 void write(){
-// Initialize your object e.g. as a pointer
-particle *p = nullptr;
+
 // Create your root file here
 TFile *f = new TFile("tree_file.root", "RECREATE");
 // Create your TTree here
 TTree *T = new TTree("T", "particle tree");
+// Initialize your object e.g. as a pointer
+particle *p = nullptr;
 // And the associated branches underneath
-T->Branch("p", "particle", &p);
+T->Branch("particle", "particle", &p);
 // for example a branch with your personal object type
 
 // Now we create our loop for filling the tree with some random data
@@ -25,10 +26,13 @@ for (Int_t i{0}; i<nEvents; i++){ // define how many events you want
     // Now fill tree
     p = new particle(px, py, pz);
     T->Fill();
-
     // Remember to delete it again otherwise you will have memory leak!
     delete p;
+    p = nullptr;
 }
 // save the tree/file
-T->AutoSave();
+T->Write();
+f->Close();
+delete f;
+
 }

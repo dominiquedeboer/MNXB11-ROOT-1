@@ -9,6 +9,17 @@ class particle : public TObject {
 
         Double_t getMagnitude() const;
 
+        Double_t getPx() const { 
+            return px; 
+        }
+        Double_t getPy() const { 
+            return py; 
+        }
+        Double_t getPz() const { 
+            return pz; 
+        }
+
+
     private:
         Double_t px;
         Double_t py;
