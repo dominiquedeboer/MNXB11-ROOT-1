@@ -1,0 +1,9 @@
+What is the difference between struct and class?
+(from reddit) The biggest difference is the defailt access. 
+Class has everything private by default, and a struct has everything public
+
+Why do we need our class to be derived from the TObject?
+(from CERN site) It provides default behaviour and protocol for all objects
+in the ROOT system.  It provides protocol for object I/O, error handling, sorting, 
+inspection, printing, drawing, etc. Every object which inherits from TObject can be
+stored in the ROOT collection classes.
