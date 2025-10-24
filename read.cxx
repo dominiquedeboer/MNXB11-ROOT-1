@@ -16,12 +16,18 @@ TTree *T = static_cast<TTree*>(file->Get("T"));
 T->SetBranchAddress("p", &p);
 Int_t N = T->GetEntries();
 
-TH2F *hist = new TH2F("hist", "px over py", 50, -0.1, 0.1, 50, -0.1, 0.1);
+TH2F *h1 = new TH2F("h1", "px over py", 50, -0.1, 0.1, 50, -0.1, 0.1);
 for (Int_t i{0}; i<N; i++){ // loop over the whole tree
     T->GetEntry(i);
-    hist->Fill(p->getMagnitude(), p->getMagnitude());
+    h1->Fill(p->getMagnitude(), p->getMagnitude());
 // do something
 }
-TCanvas *c = new TCanvas("c", "px over py", 800, 600);
-hist->Draw("COLZ");
+auto canvas1 = TCanvas("c1", "", 800, 600);
+h1->Draw("P");
+// canvas1->SaveAS("px_vs_py.pdf");
+
+auto canvas2 = TCanvas("c2", "", 800, 600);
+T->Draw("px*py:pz", "getMagnitude()>0.01", "COLZ");
+// canvas2->SaveAs("pxpy_vs_pz.pdf");
+
 }
